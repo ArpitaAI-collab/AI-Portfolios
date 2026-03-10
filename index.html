@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI/ML Portfolio — Data Scientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#06080f; --s1:#0d1017; --s2:#141720;
+      --border:#1e2230; --border2:#2a2f45;
+      --amber:#f5c542; --teal:#2dd4bf; --rose:#fb7185;
+      --sky:#60a5fa; --lav:#a78bfa;
+      --text:#e2e8f0; --muted:#64748b; --muted2:#94a3b8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Cabinet Grotesk',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+    .bg-texture{position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 800px 600px at 10% 20%,rgba(245,197,66,.05) 0%,transparent 60%),
+                 radial-gradient(ellipse 600px 500px at 90% 80%,rgba(45,212,191,.04) 0%,transparent 60%),
+                 radial-gradient(ellipse 500px 400px at 50% 50%,rgba(167,139,250,.03) 0%,transparent 60%);}
+    .bg-dots{position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);
+      background-size:28px 28px;}
+
+    .wrap{max-width:1120px;margin:0 auto;padding:0 28px;position:relative;z-index:10;}
+
+    /* HEADER */
+    header{padding:72px 0 52px;}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;
+      font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:24px;}
+    .blink{width:6px;height:6px;border-radius:50%;background:var(--amber);animation:blink 2s infinite;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    .hero-row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+    h1{font-family:'Clash Display',sans-serif;font-size:clamp(38px,6.5vw,68px);font-weight:700;
+       line-height:.95;letter-spacing:-.03em;}
+    h1 .accent{color:var(--amber);}
+    .hero-right{max-width:420px;}
+    .hero-bio{font-size:14px;color:var(--muted2);line-height:1.7;font-weight:300;margin-bottom:20px;}
+    .links-row{display:flex;flex-wrap:wrap;gap:8px;}
+    .pl{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--border2);
+        border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted2);
+        text-decoration:none;transition:all .2s;background:var(--s1);}
+    .pl:hover{border-color:var(--amber);color:var(--amber);background:rgba(245,197,66,.05);}
+    .pl svg{width:11px;height:11px;}
+
+    /* METRICS */
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:44px 0;}
+    .met{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:18px 20px;position:relative;overflow:hidden;}
+    .met::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+    .met:nth-child(1)::after{background:var(--amber);}
+    .met:nth-child(2)::after{background:var(--teal);}
+    .met:nth-child(3)::after{background:var(--rose);}
+    .met:nth-child(4)::after{background:var(--sky);}
+    .met-val{font-family:'Clash Display',sans-serif;font-size:26px;font-weight:700;line-height:1;margin-bottom:5px;}
+    .met:nth-child(1) .met-val{color:var(--amber);}
+    .met:nth-child(2) .met-val{color:var(--teal);}
+    .met:nth-child(3) .met-val{color:var(--rose);}
+    .met:nth-child(4) .met-val{color:var(--sky);}
+    .met-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+
+    /* SEC HEADER */
+    .sh{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+    .sh-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+            color:var(--muted);white-space:nowrap;}
+    .sh-line{flex:1;height:1px;background:var(--border);}
+    .sh-pill{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 10px;border-radius:100px;
+             border:1px solid var(--border2);color:var(--muted2);white-space:nowrap;}
+
+    /* FILTERS */
+    .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+    .ft{padding:5px 14px;border:1px solid var(--border);border-radius:100px;background:transparent;
+        color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;cursor:pointer;
+        transition:all .2s;letter-spacing:.05em;text-transform:uppercase;}
+    .ft:hover{border-color:var(--amber);color:var(--amber);}
+    .ft.on{border-color:var(--amber);color:var(--amber);background:rgba(245,197,66,.08);}
+
+    /* GRID */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
+
+    /* CARD */
+    .card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:24px;
+          text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:12px;
+          position:relative;overflow:hidden;transition:all .25s ease;animation:rise .5s ease both;}
+    @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}
+    .card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}
+    .card:nth-child(5){animation-delay:.20s}.card:nth-child(6){animation-delay:.24s}
+    .card:nth-child(7){animation-delay:.28s}.card:nth-child(8){animation-delay:.32s}
+    .card:nth-child(9){animation-delay:.36s}.card:nth-child(10){animation-delay:.40s}
+    .card:nth-child(11){animation-delay:.44s}.card:nth-child(12){animation-delay:.48s}
+    .card:nth-child(13){animation-delay:.52s}.card:nth-child(14){animation-delay:.56s}
+
+    .card-gl{position:absolute;inset:0;border-radius:14px;opacity:0;transition:opacity .3s;pointer-events:none;}
+    .card:hover .card-gl{opacity:1;}
+    .card.acc .card-gl{background:radial-gradient(ellipse at top left,rgba(245,197,66,.07),transparent 55%);}
+    .card.gen .card-gl{background:radial-gradient(ellipse at top left,rgba(45,212,191,.07),transparent 55%);}
+    .card.ml  .card-gl{background:radial-gradient(ellipse at top left,rgba(96,165,250,.07),transparent 55%);}
+    .card.fl  .card-gl{background:radial-gradient(ellipse at top left,rgba(167,139,250,.09),transparent 55%);}
+
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;
+                  transition:opacity .3s;border-radius:14px 14px 0 0;}
+    .card:hover::before{opacity:1;}
+    .card.acc::before{background:linear-gradient(90deg,var(--amber),transparent);}
+    .card.gen::before{background:linear-gradient(90deg,var(--teal),transparent);}
+    .card.ml::before {background:linear-gradient(90deg,var(--sky),transparent);}
+    .card.fl::before {background:linear-gradient(90deg,var(--lav),var(--teal));}
+
+    .card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.5);}
+
+    .c-head{display:flex;justify-content:space-between;align-items:flex-start;}
+    .c-icon{width:42px;height:42px;border-radius:10px;background:var(--s2);border:1px solid var(--border);
+            display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+    .c-arr{font-size:15px;color:var(--muted);transition:all .2s;}
+    .card:hover .c-arr{color:var(--amber);transform:translate(2px,-2px);}
+
+    .c-type{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px;}
+    .card.acc .c-type{color:var(--amber);}
+    .card.gen .c-type{color:var(--teal);}
+    .card.ml  .c-type{color:var(--sky);}
+    .card.fl  .c-type{color:var(--lav);}
+
+    .c-title{font-family:'Clash Display',sans-serif;font-size:16px;font-weight:600;line-height:1.25;
+             color:var(--text);margin-bottom:7px;}
+    .c-desc{font-size:13px;color:var(--muted2);line-height:1.6;font-weight:300;}
+
+    .hls{display:flex;flex-wrap:wrap;gap:5px;}
+    .hl{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 9px;border-radius:5px;
+        background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+
+    .inds{display:flex;flex-wrap:wrap;gap:5px;}
+    .ind{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border-radius:4px;
+         background:var(--s2);border:1px solid var(--border);color:var(--muted);}
+
+    .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;}
+    .tag{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 8px;border-radius:4px;}
+    .card.acc .tag{background:rgba(245,197,66,.07);border:1px solid rgba(245,197,66,.2);color:var(--amber);}
+    .card.gen .tag{background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.2);color:var(--teal);}
+    .card.ml  .tag{background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.2);color:var(--sky);}
+    .card.fl  .tag{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);color:var(--lav);}
+
+    .c-foot{display:flex;align-items:center;padding-top:11px;border-top:1px solid var(--border);gap:8px;}
+    .lk{display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:9px;
+        color:var(--muted);letter-spacing:.05em;}
+    .lk-dot{width:5px;height:5px;border-radius:50%;background:var(--rose);}
+    .rc{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--teal);}
+
+    /* FLAGSHIP (wide card) */
+    .card.fl{grid-column:span 2;}
+    .fl-inner{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+    .fl-l{display:flex;flex-direction:column;gap:10px;}
+    .fl-r{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:16px;
+          display:flex;flex-direction:column;gap:9px;}
+    .fl-rlbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;
+             text-transform:uppercase;margin-bottom:3px;}
+    .cap{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--muted2);line-height:1.5;}
+    .cap-d{width:4px;height:4px;border-radius:50%;background:var(--lav);flex-shrink:0;margin-top:6px;}
+
+    .sec-gap{margin-top:60px;}
+    .hidden{display:none!important;}
+
+    footer{margin-top:72px;padding:28px 0 44px;border-top:1px solid var(--border);
+           display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+    .fl-txt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+    .fr-txt{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+            font-size:10px;color:var(--muted);}
+
+    @media(max-width:768px){
+      .metrics{grid-template-columns:1fr 1fr;}
+      .card.fl{grid-column:span 1;}
+      .fl-inner{grid-template-columns:1fr;}
+      footer{flex-direction:column;align-items:flex-start;}
+    }
+    @media(max-width:480px){
+      .grid{grid-template-columns:1fr;}
+      .hero-row{flex-direction:column;align-items:flex-start;}
+    }
+  </style>
+</head>
+<body>
+<div class="bg-texture"></div>
+<div class="bg-dots"></div>
+<div class="wrap">
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="eyebrow"><span class="blink"></span>AI · ML · GenAI · Data Science Portfolio</div>
+  <div class="hero-row">
+    <h1>Your Name<br><span class="accent">Data Scientist</span></h1>
+    <div class="hero-right">
+      <p class="hero-bio">Building enterprise-grade AI systems — from agentic multi-model pipelines and RAG platforms to production ML. Specialized in GenAI, NLP, computer vision, and large-scale data intelligence.</p>
+      <div class="links-row">
+        <a href="https://github.com/yourusername" target="_blank" class="pl">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" class="pl">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:your@email.com" class="pl">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ METRICS ══ -->
+<div class="metrics">
+  <div class="met"><div class="met-val">20+</div><div class="met-lbl">Projects Built</div></div>
+  <div class="met"><div class="met-val">8</div><div class="met-lbl">AI Accelerators</div></div>
+  <div class="met"><div class="met-val">95%+</div><div class="met-lbl">Peak Accuracy</div></div>
+  <div class="met"><div class="met-val">80%</div><div class="met-lbl">QA Time Saved</div></div>
+</div>
+
+<!-- ══ FLAGSHIP ══ -->
+<div class="sh"><span class="sh-lbl">Flagship Project</span><div class="sh-line"></div><span class="sh-pill">★ Featured</span></div>
+<div class="grid" style="margin-bottom:16px;">
+  <a class="card fl" data-cat="fl" href="https://github.com/yourusername/digital-twin-market-survey" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head">
+      <div><div class="c-type">★ Flagship · GenAI + Graph ML</div><div class="c-title">Digital Twin for Market Survey</div></div>
+      <span class="c-arr">↗</span>
+    </div>
+    <div class="fl-inner">
+      <div class="fl-l">
+        <p class="c-desc">EDA and clustering pipeline (TF-IDF, Autoencoder, K-Means) to derive digital twin personas from <strong style="color:var(--lav)">35TB+</strong> categorical data. RAG chatbot using fine-tuned open-source GPT for persona-aware responses. KGNN recommendation engine for top-5 professional connections.</p>
+        <div class="hls"><span class="hl">35TB+ Data Scale</span><span class="hl">KGNN Engine</span><span class="hl">RAG Chatbot</span></div>
+        <div class="tags">
+          <span class="tag">TF-IDF</span><span class="tag">Autoencoder</span><span class="tag">K-Means</span>
+          <span class="tag">KGNN</span><span class="tag">RAG</span><span class="tag">Fine-tuned GPT</span><span class="tag">Knowledge Graph</span>
+        </div>
+      </div>
+      <div class="fl-r">
+        <div class="fl-rlbl">Key Capabilities</div>
+        <div class="cap"><span class="cap-d"></span>Persona generation from 35TB+ categorical data via Autoencoder + K-Means</div>
+        <div class="cap"><span class="cap-d"></span>KGNN-powered recommendation for top-5 professional connections</div>
+        <div class="cap"><span class="cap-d"></span>RAG chatbot with grounded, persona-aware responses</div>
+        <div class="cap"><span class="cap-d"></span>Guided AI conversations for client-facing engagement</div>
+        <div class="cap"><span class="cap-d"></span>End-to-end pipeline: EDA → Clustering → Graph → GenAI</div>
+      </div>
+    </div>
+    <div class="c-foot">
+      <span class="lk"><span class="lk-dot"></span>Private Repo · Code & Data Protected</span>
+      <span class="rc">View Architecture →</span>
+    </div>
+  </a>
+</div>
+
+<!-- ══ ALL PROJECTS ══ -->
+<div class="sec-gap"></div>
+<div class="sh"><span class="sh-lbl">All Projects</span><div class="sh-line"></div><span class="sh-pill" id="count-pill">21 Total</span></div>
+<div class="filters">
+  <button class="ft on" data-f="all">All</button>
+  <button class="ft" data-f="acc">🟡 Accelerators</button>
+  <button class="ft" data-f="gen">🟢 GenAI</button>
+  <button class="ft" data-f="ml">🔵 ML · Deep Learning</button>
+</div>
+
+<div class="grid" id="grid">
+
+  <!-- ─ TESTAMENT ─ -->
+  <a class="card acc" data-cat="acc" href="https://github.com/yourusername/testament" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">🧪</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">Accelerator · QA Automation</div>
+      <div class="c-title">Testament</div>
+      <p class="c-desc">AI platform converting user stories and GitHub issues into structured test cases and Playwright scripts. Reduced QA lifecycle by 70–80%. Generates JSON + HTML test reports with full traceability.</p>
+    </div>
+    <div class="hls"><span class="hl">70–80% QA Time Saved</span></div>
+    <div class="inds"><span class="ind">SaaS</span><span class="ind">DevOps</span><span class="ind">Agile</span></div>
+    <div class="tags"><span class="tag">Playwright</span><span class="tag">LLM</span><span class="tag">Test Gen</span><span class="tag">CI/CD</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ AUTODOC ─ -->
+  <a class="card acc" data-cat="acc" href="https://github.com/yourusername/autodoc" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">📦</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">Accelerator · Contract Intelligence</div>
+      <div class="c-title">AutoDoc</div>
+      <p class="c-desc">Transforms billions of shipping contracts into structured, searchable intelligence. Multilingual clause extraction, NL-to-SQL translation, and vector semantic search. CPU-optimized on-premise deployment.</p>
+    </div>
+    <div class="hls"><span class="hl">80%+ Review Reduction</span><span class="hl">Hours → Seconds</span></div>
+    <div class="inds"><span class="ind">Logistics</span><span class="ind">Maritime</span><span class="ind">Legal</span></div>
+    <div class="tags"><span class="tag">RAG</span><span class="tag">NL2SQL</span><span class="tag">Vector Search</span><span class="tag">Multilingual LLM</span><span class="tag">OCR</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ DATAGPT ─ -->
+  <a class="card gen" data-cat="gen" href="https://github.com/yourusername/datagpt" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">🔍</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">GenAI · Document Intelligence</div>
+      <div class="c-title">DataGPT</div>
+      <p class="c-desc">Multi-PDF & multi-URL Q&A with advanced RAG, hybrid retrieval, and citation-backed answers. Domain fine-tuned for legal, compliance, scientific, and HR immigration. 90% accuracy on cross-document queries.</p>
+    </div>
+    <div class="hls"><span class="hl">90% Accuracy</span><span class="hl">60–80% Faster Research</span></div>
+    <div class="inds"><span class="ind">Legal</span><span class="ind">Compliance</span><span class="ind">HR · Immigration</span></div>
+    <div class="tags"><span class="tag">RAG</span><span class="tag">Hybrid Retrieval</span><span class="tag">Fine-tuned LLM</span><span class="tag">CPU Deploy</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ DOC DIGITIZATION ─ -->
+  <a class="card acc" data-cat="acc" href="https://github.com/yourusername/doc-digitization" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">📄</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">Accelerator · Agentic OCR</div>
+      <div class="c-title">Document Digitization</div>
+      <p class="c-desc">Agentic OCR supporting 113 languages with handwriting recognition, stamp/seal/signature detection. Processes KYC, insurance, and medical documents. Validated on English, Marathi, Kannada, Gujarati.</p>
+    </div>
+    <div class="hls"><span class="hl">>95% Accuracy</span><span class="hl">113 Languages</span></div>
+    <div class="inds"><span class="ind">Banking</span><span class="ind">Insurance</span><span class="ind">Healthcare</span><span class="ind">Gov</span></div>
+    <div class="tags"><span class="tag">Agentic OCR</span><span class="tag">Multilingual</span><span class="tag">Handwriting</span><span class="tag">KYC</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ FORENSIC CODE VERIFIER ─ -->
+  <a class="card acc" data-cat="acc" href="https://github.com/yourusername/forensic-code-verifier" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">🏥</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">Accelerator · Medical Coding Audit</div>
+      <div class="c-title">Forensic Code Verifier</div>
+      <p class="c-desc">ICD-10 diagnosis & procedure code validation on the 2025 knowledge base. Detects sequencing violations, CPT mismatches, and coding errors. Rule-based + LLM forensic reasoning with explainable audit trail.</p>
+    </div>
+    <div class="hls"><span class="hl">60–80% Audit Reduction</span></div>
+    <div class="inds"><span class="ind">Health Insurance</span><span class="ind">TPA</span><span class="ind">Revenue Cycle</span></div>
+    <div class="tags"><span class="tag">ICD-10</span><span class="tag">Rule Engine</span><span class="tag">LLM Reasoning</span><span class="tag">Audit AI</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ CLAIMS ADJUDICATOR ─ -->
+  <a class="card acc" data-cat="acc" href="https://github.com/yourusername/claims-adjudicator" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">⚖️</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">Accelerator · Insurance Adjudication</div>
+      <div class="c-title">Claims Adjudicator</div>
+      <p class="c-desc">Multi-agent AI automating the full insurance claim lifecycle across 4 phases: Forensic, Clinical, Policy, and Final Verdict. RAG-based policy clause retrieval with full payable/non-payable financial breakdown.</p>
+    </div>
+    <div class="hls"><span class="hl">50–70% Faster Processing</span></div>
+    <div class="inds"><span class="ind">Health Insurance</span><span class="ind">TPA</span><span class="ind">Payer Orgs</span></div>
+    <div class="tags"><span class="tag">Multi-Agent</span><span class="tag">RAG</span><span class="tag">4-Phase Pipeline</span><span class="tag">Policy AI</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ MEDIGUARD ─ -->
+  <a class="card acc" data-cat="acc" href="https://github.com/yourusername/mediguard" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">🛡️</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">Accelerator · Hospital Bill Audit</div>
+      <div class="c-title">MediGuard Compliance Agent</div>
+      <p class="c-desc">Multi-agent framework detecting overbilling, fraud risk, and compliance violations in healthcare claims. Digital Scribe for bill parsing + RAG regulatory intelligence + line-item financial audit logic.</p>
+    </div>
+    <div class="inds"><span class="ind">Healthcare</span><span class="ind">Fraud Detection</span><span class="ind">Compliance</span></div>
+    <div class="tags"><span class="tag">Multi-Agent</span><span class="tag">Overbilling Detection</span><span class="tag">RAG</span><span class="tag">Clinical AI</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ MEDICAL REPORT GEN ─ -->
+  <a class="card gen" data-cat="gen" href="https://github.com/yourusername/medical-report-gen" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">🩺</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">GenAI · Medical NLP</div>
+      <div class="c-title">Medical Report Generation</div>
+      <p class="c-desc">Fine-tuned LLM on medical transcripts to generate structured clinical reports. 80–85% accuracy on diagnostic terminology. Handles discharge summaries and prescription structuring.</p>
+    </div>
+    <div class="hls"><span class="hl">80–85% Accuracy</span></div>
+    <div class="inds"><span class="ind">Healthcare</span><span class="ind">Clinical NLP</span></div>
+    <div class="tags"><span class="tag">Fine-tuning</span><span class="tag">Medical NLP</span><span class="tag">LLM</span><span class="tag">Transcript AI</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ DECISION SUPPORT ─ -->
+  <a class="card gen" data-cat="gen" href="https://github.com/yourusername/decision-support-portfolio" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">📊</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">GenAI · FinTech</div>
+      <div class="c-title">Decision Support System</div>
+      <p class="c-desc">LLM-powered portfolio management and investment insights engine. Integrates market data retrieval, risk analysis, and natural language explanations for data-driven investment decision-making.</p>
+    </div>
+    <div class="inds"><span class="ind">FinTech</span><span class="ind">Investment</span></div>
+    <div class="tags"><span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">FinTech</span><span class="tag">Decision AI</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ EARTHQUAKE SVM ─ -->
+  <a class="card ml" data-cat="ml" href="https://github.com/yourusername/earthquake-prediction-svm" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">🌍</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">ML · Geoscience</div>
+      <div class="c-title">Earthquake Prediction — SVM + GBM</div>
+      <p class="c-desc">Seismic event prediction using SVM and Gradient Boosting on historical geological datasets. Ensemble approach achieves 68% accuracy on earthquake occurrence classification.</p>
+    </div>
+    <div class="hls"><span class="hl">68% Accuracy</span></div>
+    <div class="tags"><span class="tag">SVM</span><span class="tag">Gradient Boosting</span><span class="tag">Geoscience</span><span class="tag">Classification</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ EARTHQUAKE LSTM ─ -->
+  <a class="card ml" data-cat="ml" href="https://github.com/yourusername/earthquake-forecasting-lstm" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">📡</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">Deep Learning · Time Series</div>
+      <div class="c-title">Earthquake Forecasting — LSTM</div>
+      <p class="c-desc">LSTM time series model for magnitude and frequency forecasting. Sliding window sequences on multi-year seismic data achieves low RMSE of 6.0 on holdout test set.</p>
+    </div>
+    <div class="hls"><span class="hl">RMSE: 6.0</span></div>
+    <div class="tags"><span class="tag">LSTM</span><span class="tag">Time Series</span><span class="tag">Forecasting</span><span class="tag">Keras</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ GEOLOGICAL CNN ─ -->
+  <a class="card ml" data-cat="ml" href="https://github.com/yourusername/geological-image-classification" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">🪨</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">Deep Learning · Computer Vision</div>
+      <div class="c-title">Geological Image Classification</div>
+      <p class="c-desc">CNN classifier for geological rock-type identification from field imagery. 78% accuracy using data augmentation and transfer learning from pretrained feature extractors.</p>
+    </div>
+    <div class="hls"><span class="hl">78% Accuracy</span></div>
+    <div class="tags"><span class="tag">CNN</span><span class="tag">Transfer Learning</span><span class="tag">Data Augmentation</span><span class="tag">PyTorch</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ RETAIL ANALYTICS ─ -->
+  <a class="card ml" data-cat="ml" href="https://github.com/yourusername/retail-mall-clustering" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">🛍️</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">ML · Retail Analytics</div>
+      <div class="c-title">Retail Analytics — Mall Segmentation</div>
+      <p class="c-desc">Clustering-based customer segmentation for retail strategy optimization. Identified actionable shopper personas delivering a measured 78% uplift in targeted sales conversion.</p>
+    </div>
+    <div class="hls"><span class="hl">78% Sales Uplift</span></div>
+    <div class="tags"><span class="tag">K-Means</span><span class="tag">Clustering</span><span class="tag">RFM Analysis</span><span class="tag">Retail</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+  <!-- ─ RECOMMENDATION ENGINE ─ -->
+  <a class="card ml" data-cat="ml" href="https://github.com/yourusername/recommendation-engine" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">💡</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">ML · Recommendation Systems</div>
+      <div class="c-title">Recommendation Engine — Association Rules</div>
+      <p class="c-desc">Market basket analysis using Apriori and association rules. Achieves 25% lift over random baseline recommendations. Applied to e-commerce product bundling and cross-sell strategies.</p>
+    </div>
+    <div class="hls"><span class="hl">25% Lift</span></div>
+    <div class="tags"><span class="tag">Apriori</span><span class="tag">Association Rules</span><span class="tag">Market Basket</span><span class="tag">E-Commerce</span></div>
+    <div class="c-foot"><span class="lk"><span class="lk-dot"></span>Private Repo</span><span class="rc">README only →</span></div>
+  </a>
+
+</div><!-- /grid -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl-txt">© 2026 · Your Name · AI/ML Portfolio</div>
+  <div class="fr-txt">
+    <span style="color:var(--rose)">🔒</span> Code & Data Private &nbsp;·&nbsp;
+    <span style="color:var(--teal)">✦</span> Architecture & README Public
+  </div>
+</footer>
+
+</div><!-- /wrap -->
+<script>
+  const tabs = document.querySelectorAll('.ft');
+  const cards = document.querySelectorAll('#grid .card');
+  const pill = document.getElementById('count-pill');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('on'));
+      t.classList.add('on');
+      const f = t.dataset.f;
+      let n = 0;
+      cards.forEach(c => {
+        const show = f === 'all' || c.dataset.cat === f;
+        c.classList.toggle('hidden', !show);
+        if (show) n++;
+      });
+      pill.textContent = n + (f === 'all' ? ' Total' : ' Projects');
+    });
+  });
+</script>
+</body>
+</html>
