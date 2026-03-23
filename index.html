@@ -27,7 +27,6 @@
 
     .wrap{max-width:1120px;margin:0 auto;padding:0 28px;position:relative;z-index:10;}
 
-    /* HEADER */
     header{padding:72px 0 52px;}
     .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;
       font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:24px;}
@@ -47,7 +46,6 @@
     .pl:hover{border-color:var(--amber);color:var(--amber);background:rgba(245,197,66,.05);}
     .pl svg{width:11px;height:11px;}
 
-    /* METRICS */
     .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:44px 0;}
     .met{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:18px 20px;position:relative;overflow:hidden;}
     .met::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
@@ -62,7 +60,6 @@
     .met:nth-child(4) .met-val{color:var(--sky);}
     .met-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
 
-    /* SEC HEADER */
     .sh{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
     .sh-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
             color:var(--muted);white-space:nowrap;}
@@ -70,7 +67,6 @@
     .sh-pill{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 10px;border-radius:100px;
              border:1px solid var(--border2);color:var(--muted2);white-space:nowrap;}
 
-    /* FILTERS */
     .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
     .ft{padding:5px 14px;border:1px solid var(--border);border-radius:100px;background:transparent;
         color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;cursor:pointer;
@@ -78,10 +74,8 @@
     .ft:hover{border-color:var(--amber);color:var(--amber);}
     .ft.on{border-color:var(--amber);color:var(--amber);background:rgba(245,197,66,.08);}
 
-    /* GRID */
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
 
-    /* CARD */
     .card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:24px;
           text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:12px;
           position:relative;overflow:hidden;transition:all .25s ease;animation:rise .5s ease both;}
@@ -93,6 +87,7 @@
     .card:nth-child(9){animation-delay:.36s}.card:nth-child(10){animation-delay:.40s}
     .card:nth-child(11){animation-delay:.44s}.card:nth-child(12){animation-delay:.48s}
     .card:nth-child(13){animation-delay:.52s}.card:nth-child(14){animation-delay:.56s}
+    .card:nth-child(15){animation-delay:.60s}
 
     .card-gl{position:absolute;inset:0;border-radius:14px;opacity:0;transition:opacity .3s;pointer-events:none;}
     .card:hover .card-gl{opacity:1;}
@@ -148,7 +143,6 @@
     .lk-dot{width:5px;height:5px;border-radius:50%;background:var(--rose);}
     .rc{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--teal);}
 
-    /* FLAGSHIP (wide card) */
     .card.fl{grid-column:span 2;}
     .fl-inner{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
     .fl-l{display:flex;flex-direction:column;gap:10px;}
@@ -185,7 +179,6 @@
 <div class="bg-dots"></div>
 <div class="wrap">
 
-<!-- ══ HEADER ══ -->
 <header>
   <div class="eyebrow"><span class="blink"></span>AI · ML · GenAI · Data Science Portfolio</div>
   <div class="hero-row">
@@ -210,15 +203,13 @@
   </div>
 </header>
 
-<!-- ══ METRICS ══ -->
 <div class="metrics">
-  <div class="met"><div class="met-val">20+</div><div class="met-lbl">Projects Built</div></div>
+  <div class="met"><div class="met-val">22+</div><div class="met-lbl">Projects Built</div></div>
   <div class="met"><div class="met-val">8</div><div class="met-lbl">AI Accelerators</div></div>
   <div class="met"><div class="met-val">95%+</div><div class="met-lbl">Peak Accuracy</div></div>
   <div class="met"><div class="met-val">80%</div><div class="met-lbl">QA Time Saved</div></div>
 </div>
 
-<!-- ══ FLAGSHIP ══ -->
 <div class="sh"><span class="sh-lbl">Flagship Project</span><div class="sh-line"></div><span class="sh-pill">★ Featured</span></div>
 <div class="grid" style="margin-bottom:16px;">
   <a class="card fl" data-cat="fl" href="https://github.com/ArpitaAI-collab/Digital-Twin.git" target="_blank">
@@ -252,9 +243,8 @@
   </a>
 </div>
 
-<!-- ══ ALL PROJECTS ══ -->
 <div class="sec-gap"></div>
-<div class="sh"><span class="sh-lbl">All Projects</span><div class="sh-line"></div><span class="sh-pill" id="count-pill">21 Total</span></div>
+<div class="sh"><span class="sh-lbl">All Projects</span><div class="sh-line"></div><span class="sh-pill" id="count-pill">23 Total</span></div>
 <div class="filters">
   <button class="ft on" data-f="all">All</button>
   <button class="ft" data-f="acc">🟡 Accelerators</button>
@@ -263,6 +253,63 @@
 </div>
 
 <div class="grid" id="grid">
+
+  <!-- ─ GEO-RAG ─ -->
+  <a class="card gen" data-cat="gen" href="https://github.com/ArpitaAI-collab/Geo_Research_RAG.git" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">🪨</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">GenAI · Graph ML · Research Intelligence</div>
+      <div class="c-title">Geo-RAG — Citation-Aware Geological Research Assistant</div>
+      <p class="c-desc">Local RAG pipeline that goes beyond semantic search by storing the citation graph in Neo4j. Retrieves from ChromaDB and the citation graph simultaneously, then asks Nemotron to cross-check whether each cited paper actually supports the claims attributed to it — catching over-generalisation common in geological literature. Runs fully on Apple Silicon, no API keys required.</p>
+    </div>
+    <div class="hls">
+      <span class="hl">Citation Cross-Checking</span>
+      <span class="hl">Dual-Store Retrieval</span>
+      <span class="hl">100% Local · No API Keys</span>
+    </div>
+    <div class="inds">
+      <span class="ind">Geoscience</span><span class="ind">Research</span><span class="ind">Structural Geology</span>
+    </div>
+    <div class="tags">
+      <span class="tag">RAG</span><span class="tag">Neo4j</span><span class="tag">ChromaDB</span>
+      <span class="tag">Nemotron</span><span class="tag">HyDE</span><span class="tag">FastAPI</span>
+      <span class="tag">Streamlit</span><span class="tag">GROBID</span>
+    </div>
+    <div class="c-foot">
+      <span class="lk"><span class="lk-dot" style="background:var(--teal)"></span>3,311 chunks · 60 papers · 59 CITES edges</span>
+      <span class="rc">View on GitHub →</span>
+    </div>
+  </a>
+
+
+  <!-- ─ MAHABHARATA GRAPHRAG ─ -->
+  <a class="card gen" data-cat="gen" href="https://github.com/ArpitaAI-collab/Mahabharata-Chatbot.git" target="_blank">
+    <div class="card-gl"></div>
+    <div class="c-head"><div class="c-icon">⚔️</div><span class="c-arr">↗</span></div>
+    <div>
+      <div class="c-type">GenAI · Graph ML · Zero-Cost Stack</div>
+      <div class="c-title">Mahabharata Chatbot — High-Reasoning GraphRAG</div>
+      <p class="c-desc">Solves the "Identity Paradox" of 1,000+ character aliases across 18 Parvas using a schema-first property graph, fuzzy alias normalisation, and 5-hop multi-hop traversal. Traces lineages, curses, and boons as typed edge properties. Persona-driven synthesis in Veda Vyasa or Narada storytelling style. Built on a $0 stack.</p>
+    </div>
+    <div class="hls">
+      <span class="hl">1,000+ Alias Resolution</span>
+      <span class="hl">5-Hop Multi-Hop Reasoning</span>
+      <span class="hl">$0 Stack</span>
+    </div>
+    <div class="inds">
+      <span class="ind">Sanskrit Literature</span><span class="ind">Knowledge Graph</span><span class="ind">NLP</span>
+    </div>
+    <div class="tags">
+      <span class="tag">GraphRAG</span><span class="tag">Neo4j</span><span class="tag">Fuzzy NER</span>
+      <span class="tag">Multi-Hop</span><span class="tag">Property Graph</span><span class="tag">FastAPI</span>
+      <span class="tag">Zero-Cost</span>
+    </div>
+    <div class="c-foot">
+      <span class="lk"><span class="lk-dot" style="background:var(--teal)"></span>18 Parvas · 1,000+ aliases · Lineage chains</span>
+      <span class="rc">View on GitHub →</span>
+    </div>
+  </a>
 
   <!-- ─ TESTAMENT ─ -->
   <a class="card acc" data-cat="acc" href="https://github.com/ArpitaAI-collab/Testament.git" target="_blank">
@@ -469,9 +516,8 @@
 
 </div><!-- /grid -->
 
-<!-- FOOTER -->
 <footer>
-  <div class="fl-txt">© 2026 · Your Name · AI/ML Portfolio</div>
+  <div class="fl-txt">© 2026 · Dr. Arpita Paul · AI/ML Portfolio</div>
   <div class="fr-txt">
     <span style="color:var(--rose)">🔒</span> Code & Data Private &nbsp;·&nbsp;
     <span style="color:var(--teal)">✦</span> Architecture & README Public
